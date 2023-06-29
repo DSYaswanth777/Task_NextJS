@@ -1,14 +1,57 @@
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
-.button{
-  background-color: black;
-  color:#ffff;
-  width:325px;
-  height:40px;
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-.logo{
-  background-color:black;
+@font-face {
+  font-family: "OpenSans";
+  /* src: url('../asset/OpenSans/OpenSans-Light.ttf'); */
+  src: url("../assets/Montserrat/static/Montserrat-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+.button {
+  background-color: black;
+  color: #ffff;
+  width: 325px;
+  height: 40px;
+}
+.logo {
+  background-color: black;
+  color: #ffff;
+}
+.menus {
   color: #ffff;
 }
 
+
+
+.color_bar {
+  width: 6px;
+  height: 66px;
+  background-color: #9bdd7c;
+}
+.color_bar2 {
+  width: 6px;
+  height: 66px;
+  background-color: #6972c3;
+}
+.social-sigin-btn{
+  width: 180px;
+height: 30px;
+border: none;
+
+}
+input{
+  height: 40px;
+background-color: #F5F5F5;
+}
+a{
+  text-decoration: none;
+  color:#346BD4;
+  font-style: normal;
+  font-weight: 400;
+  font-family: "Lato", sans-serif;
+}
