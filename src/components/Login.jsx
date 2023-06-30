@@ -2,12 +2,43 @@ import Image from "next/image";
 import React from "react";
 import google from "../assets/google_icon.svg";
 import apple from "../assets/apple_icon.svg";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { signIn, signUp } from "../redux/actions/authActions";
+import { useRouter } from "next/router";
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const loading = useSelector((state) => state.auth.loading);
+  const error = useSelector((state) => state.auth.error);
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const credentials = {
+      email,
+      password,
+    };
+    dispatch(signIn(credentials)).then(() => {
+      // Redirect to the home route on successful sign-in
+      router.push("/home");
+    });
+  };
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const userData = {
+      email,
+      password,
+    };
+    dispatch(signUp(userData));
+    console.log(userData);
+  };
   return (
-    <div className="flex  items-center bg-background">
-      <div className="flex items-center justify-center  logo w-1/3 h-screen md:flex-row">
+    <div className="items-center bg-background flex gap-5 flex flex-col md:flex-row ">
+      <div className="flex items-center justify-center logo h-screen w-1/3  ">
         <div
-          className="text-center text-5xl font-bold text-white"
+          className="text-center text-5xl font-bold text-white transform rotate-90 sm:rotate-0 board"
           style={{
             fontFamily: "Montserrat, sans-serif",
             fontWeight: 700,
@@ -19,11 +50,11 @@ const Login = () => {
         </div>
       </div>
 
-      <div className="mx-auto">
-        <div className="login">
-          <div className="w-full">
+      <div className="mx-auto ">
+        <div className="login ">
+          <div className="w-full ">
             <h2
-              className="text-3xl font-bold pb-2"
+              className="text-3xl font-bold pb-2 pt-32"
               style={{
                 fontFamily: "Montserrat, sans-serif",
                 fontWeight: 700,
@@ -53,8 +84,8 @@ const Login = () => {
                 }}
               >
                 {" "}
-                <Image src={google} className=""></Image> &nbsp;Sigin In with
-                Google
+                <Image src={google} alt="" className=""></Image> &nbsp;Sigin In
+                with Google
               </button>
               <button
                 className="bg-white social-sigin-btn rounded-md"
@@ -64,7 +95,7 @@ const Login = () => {
                   color: "#858585",
                 }}
               >
-                <Image src={apple}></Image>
+                <Image src={apple} alt=""></Image>
                 &nbsp;Sigin In with Apple
               </button>
             </div>
@@ -84,6 +115,8 @@ const Login = () => {
                   className=" appearance-none border-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="username"
                   type="text"
+                  value={email} // Bind the value to the component state
+                  onChange={(e) => setEmail(e.target.value)} //
                 />
               </div>
               <div className="mb-6">
@@ -101,13 +134,26 @@ const Login = () => {
                   className=" appearance-none border-none border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="password"
                   type="password"
+                  value={password} // Bind the value to the component state
+                  onChange={(e) => setPassword(e.target.value)} // Update the component state when the input changes
                 />
                 <a href="" className="text-blue-500">
                   Forgot Password?
                 </a>{" "}
               </div>
-              <div className="flex items-center justify-between">
-                <button className="button p-3 rounded-xl">Sign In</button>
+              <div className="flex  flex-col items-center justify-between gap-5">
+                <button
+                  className="button p-3 rounded-xl"
+                  onClick={handleSignIn}
+                >
+                  Sign In
+                </button>
+                <button
+                  className="button p-3 rounded-xl"
+                  onClick={handleSignUp}
+                >
+                  Sign Up
+                </button>
               </div>
             </form>
             <p

@@ -8,8 +8,8 @@ import Image from "next/image";
 const Dashboard_Items = () => {
   return (
     <div>
-      <div className=" dashboard pt-8 pr-6  p-4 w-full flex justify-between">
-        <div className="bg-green p-5 rounded-2xl flex justify-between dashboard-items gap-10">
+      <div className="dashboard pt-5   pr-6 Dashboard gap-10">
+        <div className="bg-green p-5 rounded-2xl flex justify-between dashboard-items  gap-10">
           <div className="pt-4">
             <div
               className="text-sm"
@@ -69,7 +69,7 @@ const Dashboard_Items = () => {
           </div>
           <Image src={Likes_Img} height={20} width={20} />
         </div>
-        <div className="bg-lavendar p-5 rounded-2xl flex justify-between dashboard- gap-10" >
+        <div className="bg-lavendar p-5 rounded-2xl flex justify-between dashboard-items gap-10" >
           <div className="pt-4">
             <div
               className="text-sm"

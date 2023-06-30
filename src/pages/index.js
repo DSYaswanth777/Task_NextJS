@@ -9,11 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <main>
-      <div className="flex bg-background h-full w-full gap-6  ">
-        <SideBar />
-        <Dashboard />
-      </div>
-      {/* <Login/> */}
+ 
     </main>
   );
 }

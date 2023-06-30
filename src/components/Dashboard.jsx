@@ -3,12 +3,13 @@ import Charts from "./Charts";
 import Image from "next/image";
 
 import Dashboard_Items from "./Dashboard_Items";
-import Header from "./Header";
+import Navbar from "./Navbar";
+// import Header from "./Header";
 const Dashboard = () => {
   return (
-    <div className="h-full w-screen">
+    <div className="h-screen w-screen">
       
-      <Header />
+      <Navbar />
       <Dashboard_Items />
       <Charts />
     </div>

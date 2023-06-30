@@ -2,13 +2,13 @@ import Image from "next/image";
 import React from "react";
 import Bell from "../assets/bell_icon.svg";
 import Profile from "../assets/profile_icon.svg";
-const Header = () => {
+const Navbar = () => {
   return (
-    <div>
-      {" "}
-      <div className="flex">
+    <div className="max-w-full">
+      {/* {" "} */}
+      <div className="flex pr-10 justify-between">
         <div
-          className="font-bold text-xl pt-4"
+          className="font-bold text-xl pt-10"
           style={{
             fontFamily: "Montserrat, sans-serif",
             fontWeight: 700,
@@ -17,13 +17,13 @@ const Header = () => {
         >
           DashBoard
         </div>
-        <div className="flex gap-3 justify-center items-center">
+        <div className="flex gap-4 justify-center ml-auto items-center">
           <div
-            className="pt-2 relative mx-auto text-gray-600"
+            className="pt-2 relative  text-gray-600 pl-2"
             style={{ minWidth: "180px", height: "30px" }}
           >
             <input
-              className="border-2 border-gray-300 bg-white h-10 px-5 rounded-lg text-sm focus:outline-none"
+              className="border-2 border-gray-300 bg-white h-10 px-6 rounded-lg text-sm focus:outline-none"
               type="search"
               name="search"
               placeholder="Search..."
@@ -48,9 +48,9 @@ const Header = () => {
               </svg>
             </div>
           </div>
-          <div className="flex gap-3 pt-5">
-            <Image src={Bell} height={15} width={15}></Image>
-            <Image src={Profile} height={20} width={20}></Image>
+          <div className="flex  gap-3 pt-5 justify-center items-center">
+            <Image src={Bell} height={20} width={20}></Image>
+            <Image src={Profile} height={25} width={25}></Image>
           </div>
         </div>
       </div>
@@ -61,4 +61,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;

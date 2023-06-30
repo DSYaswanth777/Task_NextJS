@@ -1,9 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+
   content: [
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  
   theme: {
     colors: {
       green: "#DDEFE0",
@@ -15,6 +17,7 @@ module.exports = {
       "dark-purple": "#000000",
       "light-white": "rgba(255,255,255,0.17)",
     },
+
   },
   plugins: [],
 };

@@ -10,19 +10,6 @@ function Charts() {
       toolbar: {
         show: false,
       },
-      animations: {
-        enabled: true,
-        easing: "linear",
-        speed: 1000,
-        animateGradually: {
-          enabled: true,
-          delay: 500,
-        },
-        dynamicAnimation: {
-          enabled: true,
-          speed: 1000,
-        },
-      },
     },
     series: [
       {
@@ -37,7 +24,7 @@ function Charts() {
       },
     ],
     xaxis: {
-      categories: ["Week 1", "Week 2", "Week 3", "Week 4"],
+      categories: [" ", "Week 1", "", "Week 2", "","Week 3", "", "Week 4"],
     },
     yaxis: {
       title: {
@@ -53,13 +40,13 @@ function Charts() {
     },
 
     title: {
-      text: "Activities",
+      // text: "Activities",
       align: "left",
       style: {
         fontSize: "20px",
         fontWeight: "bold",
         fontStyle: "Montserrat",
-        color: "#333",
+        color: "blue",
       },
     },
   };
@@ -68,14 +55,13 @@ function Charts() {
 
 
   return (
-    <div className="pr-6">
-      <div className="bg-white  rounded-2xl mt-4 p-6">
+    <div className="pr-5 " style={{width:"99%"}}>
+      <div className="bg-white  rounded-3xl mt-4 p-5">
         <ApexCharts
           options={lineGraph}
           series={lineGraph.series}
           type="line"
-          height={200}
-         // width={1000}
+          height={300}
         />
       </div>
       <PieCharts />
