@@ -69,7 +69,7 @@ const Login = () => {
       document.head.removeChild(script);
       delete window.handleGoogleSignInCallback;
     };
-  }, [router]);
+  }, []);
 
   return (
     <div className="items-center bg-background flex gap-5 flex flex-col md:flex-row">
