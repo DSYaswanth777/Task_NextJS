@@ -5,10 +5,11 @@ import { signIn, signUp } from "../redux/actions/authActions";
 import { useRouter } from "next/router";
 import google from "../assets/google_icon.svg";
 import apple from "../assets/apple_icon.svg";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSigningUp, setIsSigningUp] = useState(false); // State to track whether the user is signing up
+  const [isSigningUp, setIsSigningUp] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -31,22 +32,23 @@ const Login = () => {
       password,
     };
     dispatch(signUp(userData));
-
   };
 
   const handleToggleSignUp = () => {
     setIsSigningUp(!isSigningUp);
   };
+
   const handleSignInWithGoogle = () => {
     const config = {
       client_id: "330809361538-5r8ep82qmtg9mtjrvk8hs1ahapotvvsn.apps.googleusercontent.com",
-      ux_mode: "popup",
-      redirect_uri: "https://verdant-licorice-316590.netlify.app/home", // Replace with your app's redirect URI
+      ux_mode: "redirect",
+      redirect_uri: "https://verdant-licorice-316590.netlify.app/home",
     };
 
     window.google.accounts.id.initialize(config);
     window.google.accounts.id.prompt();
   };
+
   useEffect(() => {
     const handleGoogleSignInCallback = (response) => {
       const { credential } = response;
@@ -55,29 +57,22 @@ const Login = () => {
       router.push("/home");
     };
 
-    // Load Google Sign-In API script
     const script = document.createElement("script");
     script.src = "https://accounts.google.com/gsi/client";
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
 
-    // Attach the callback function to the window object
     window.handleGoogleSignInCallback = handleGoogleSignInCallback;
 
     return () => {
-      // Clean up the script and callback function when the component unmounts
       document.head.removeChild(script);
       delete window.handleGoogleSignInCallback;
     };
   }, [router]);
 
-  // ...
-
-  
-
   return (
-    <div className="items-center bg-background flex gap-5 flex flex-col md:flex-row ">
+    <div className="items-center bg-background flex gap-5 flex flex-col md:flex-row">
       <div className="flex items-center justify-center logo h-screen w-full md:w-1/3 xs:w-max-full">
         <div
           className="text-center text-5xl font-bold text-white transform rotate-90 sm:rotate-0 board"
@@ -104,7 +99,7 @@ const Login = () => {
                 lineHeight: "43.88px",
               }}
             >
-              {isSigningUp ? "Sign Up" : "Sign In"} {/* Toggle heading text based on the isSigningUp state */}
+              {isSigningUp ? "Sign Up" : "Sign In"}
             </h2>
             <p
               className="pb-6 font-bold"
@@ -113,7 +108,7 @@ const Login = () => {
                 fontWeight: 400,
               }}
             >
-              {isSigningUp ? "Sign up for an account" : "Sign in to your account"} {/* Toggle description text based on the isSigningUp state */}
+              {isSigningUp ? "Sign up for an account" : "Sign in to your account"}
             </p>
             <div className="btn-class flex gap-5 pb-4">
               <button
@@ -125,8 +120,7 @@ const Login = () => {
                 }}
                 onClick={handleSignInWithGoogle}
               >
-                <Image src={google} alt="" className="" /> &nbsp;Sign In
-                with Google
+                <Image src={google} alt="" className="" /> &nbsp;Sign In with Google
               </button>
               <button
                 className="bg-white social-sigin-btn rounded-md"
@@ -184,9 +178,9 @@ const Login = () => {
               <div className="flex flex-col items-center justify-between gap-5 transform rotate-90 sm:rotate-0 ">
                 <button
                   className="button p-3 rounded-xl cursor-pointer"
-                  onClick={isSigningUp ? handleSignUp : handleSignIn} // Call handleSignUp or handleSignIn based on the isSigningUp state
+                  onClick={isSigningUp ? handleSignUp : handleSignIn}
                 >
-                  {isSigningUp ? "Sign Up" : "Sign In"} {/* Toggle button text based on the isSigningUp state */}
+                  {isSigningUp ? "Sign Up" : "Sign In"}
                 </button>
               </div>
             </form>
@@ -201,7 +195,7 @@ const Login = () => {
             >
               {isSigningUp ? "Already have an account?" : "Don't have an account?"}{" "}
               <a href="#" className="" onClick={handleToggleSignUp}>
-                {isSigningUp ? "Sign In Here" : "Register Here"} {/* Toggle link text based on the isSigningUp state */}
+                {isSigningUp ? "Sign In Here" : "Register Here"}
               </a>{" "}
             </p>
           </div>
