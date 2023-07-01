@@ -55,7 +55,7 @@ const Login = () => {
       </div>
 
       <div className="mx-auto">
-        <div className="login">
+        <div className="login pl-4">
           <div className="w-full">
             <h2
               className="text-3xl font-bold pb-2 pt-32 transform rotate-90 sm:rotate-0 "
