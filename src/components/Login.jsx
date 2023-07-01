@@ -118,7 +118,11 @@ const Login = () => {
                   fontWeight: 400,
                   color: "#858585",
                 }}
-                onClick={handleSignInWithGoogle}
+                onClick={() =>{
+                  handleSignInWithGoogle()
+                  router.push("/home")
+                }}
+        
               >
                 <Image src={google} alt="" className="" /> &nbsp;Sign In with Google
               </button>
