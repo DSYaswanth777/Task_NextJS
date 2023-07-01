@@ -1,6 +1,6 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {  useState } from "react";
+import { useDispatch,} from "react-redux";
 import { signIn, signUp } from "../redux/actions/authActions";
 import { useRouter } from "next/router";
 import google from "../assets/google_icon.svg";
@@ -20,7 +20,6 @@ const Login = () => {
       password,
     };
     dispatch(signIn(credentials)).then(() => {
-      // Redirect to the home route on successful sign-in
       router.push("/home");
     });
   };
@@ -38,38 +37,6 @@ const Login = () => {
     setIsSigningUp(!isSigningUp);
   };
 
-  const handleSignInWithGoogle = () => {
-    const config = {
-      client_id: "330809361538-5r8ep82qmtg9mtjrvk8hs1ahapotvvsn.apps.googleusercontent.com",
-      ux_mode: "redirect",
-      redirect_uri: "https://verdant-licorice-316590.netlify.app/home",
-    };
-
-    window.google.accounts.id.initialize(config);
-    window.google.accounts.id.prompt();
-  };
-
-  useEffect(() => {
-    const handleGoogleSignInCallback = (response) => {
-      const { credential } = response;
-      const user = credential;
-      console.log(user);
-      router.push("/home");
-    };
-
-    const script = document.createElement("script");
-    script.src = "https://accounts.google.com/gsi/client";
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-
-    window.handleGoogleSignInCallback = handleGoogleSignInCallback;
-
-    return () => {
-      document.head.removeChild(script);
-      delete window.handleGoogleSignInCallback;
-    };
-  }, []);
 
   return (
     <div className="items-center bg-background flex gap-5 flex flex-col md:flex-row">
@@ -118,10 +85,7 @@ const Login = () => {
                   fontWeight: 400,
                   color: "#858585",
                 }}
-                onClick={() =>{
-                  handleSignInWithGoogle()
-                  router.push("/home")
-                }}
+                // onClick={handleSignInWithGoogle}
         
               >
                 <Image src={google} alt="" className="" /> &nbsp;Sign In with Google
