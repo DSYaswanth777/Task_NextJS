@@ -27,7 +27,7 @@ const Dashboard_Items = () => {
               $2,129,430
             </div>
           </div>
-          <Image src={Revenue_Img} height={25} width={25} />
+          <Image src={Revenue_Img} height={25} width={25}  alt=""/>
         </div>
         <div className="bg-peach p-5 rounded-2xl flex justify-between dashboard-items gap-10"  >
           <div className="pt-4">
@@ -47,7 +47,7 @@ const Dashboard_Items = () => {
               $2,129,430
             </div>
           </div>
-          <Image src={Transcation_Img} height={20} width={20} />
+          <Image src={Transcation_Img} height={20} width={20} alt="" />
         </div>
         <div className="bg-pink p-5 rounded-2xl flex justify-between dashboard-items gap-10"  >
           <div className="pt-4">
@@ -67,7 +67,7 @@ const Dashboard_Items = () => {
               $2,129,430
             </div>
           </div>
-          <Image src={Likes_Img} height={20} width={20} />
+          <Image src={Likes_Img} height={20} width={20} alt="" />
         </div>
         <div className="bg-lavendar p-5 rounded-2xl flex justify-between dashboard-items gap-10" >
           <div className="pt-4">
@@ -87,7 +87,7 @@ const Dashboard_Items = () => {
               $2,129,430
             </div>
           </div>
-          <Image src={Users_Img} height={25} width={25} />
+          <Image src={Users_Img} height={25} width={25} alt="" />
         </div>
       </div>
     </div>

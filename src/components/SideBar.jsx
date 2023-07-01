@@ -64,7 +64,7 @@ const SideBar = () => {
               }`}
              
             >
-              <Image src={Menu.src} />
+              <Image src={Menu.src} alt=""/>
               <span
                 className={`${!open && "hidden"} origin-left  text-white`}
                 style={{

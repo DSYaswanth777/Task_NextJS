@@ -138,7 +138,7 @@ const PieCharts = () => {
                 fontSize: "18px",
               }}
             >
-              Today's Schedule
+              Today&rsquo;s Schedule
             </div>
             <div
               className="font-light text-xs ml-auto"
