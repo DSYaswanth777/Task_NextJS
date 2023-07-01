@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn, signUp } from "../redux/actions/authActions";
 import { useRouter } from "next/router";
@@ -37,7 +37,38 @@ const Login = () => {
   const handleToggleSignUp = () => {
     setIsSigningUp(!isSigningUp);
   };
+  const handleSignInWithGoogle = () => {
+    const config = {
+      client_id: "330809361538-5r8ep82qmtg9mtjrvk8hs1ahapotvvsn.apps.googleusercontent.com",
+      ux_mode: "popup",
+      redirect_uri: "https://your-app-domain.com/auth/google/callback", // Replace with your app's redirect URI
+    };
 
+    window.google.accounts.id.initialize(config);
+    window.google.accounts.id.prompt();
+  };
+  useEffect(() => {
+    // Load Google Sign-In API script
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+
+    // Define callback function for Google Sign-In response
+    window.handleGoogleSignInCallback = (response) => {
+      const { credential } = response;
+      const user = credential;
+      console.log(user);
+      router.push("/home");
+    };
+
+    return () => {
+      // Clean up the script and callback function when the component unmounts
+      document.head.removeChild(script);
+      delete window.handleGoogleSignInCallback;
+    };
+  }, []);
   return (
     <div className="items-center bg-background flex gap-5 flex flex-col md:flex-row ">
       <div className="flex items-center justify-center logo h-screen w-full md:w-1/3">
@@ -85,6 +116,7 @@ const Login = () => {
                   fontWeight: 400,
                   color: "#858585",
                 }}
+                onClick={handleSignInWithGoogle}
               >
                 <Image src={google} alt="" className="" /> &nbsp;Sign In
                 with Google
