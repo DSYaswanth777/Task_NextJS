@@ -21,14 +21,14 @@ const SideBar = () => {
 
   return (
     
-    <div className="p-4 h-screen">
+    <div className="p-4 h-full">
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
       `}</style>
       <div
         className={`${
           open ? "w-56" : "w-24"
-        } bg-dark-purple p-5 relative rounded-3xl h-full`}
+        } bg-dark-purple p-5 relative rounded-3xl `}
       >
         <div className="flex items-center">
           {open ? (
@@ -59,7 +59,7 @@ const SideBar = () => {
               key={index}
               className={`flex rounded-md p-2 cursor-pointer  text-bold text-gray-300 text-sm items-center gap-x-4 ${
                 Menu.gap ? "mt-9" : "mt-2"
-              } ${index === Menus.length - 2 && ""} ${
+              } ${index === Menus.length - 2 && "pt-64"} ${
                 index === 0 && "font-extrabold"
               }`}
              

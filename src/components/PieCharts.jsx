@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { RotateSpinner,  } from "react-spinners-kit";
 
 const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
-const PieCharts = () => {
-  const [selectedDate, setSelectedDate] = useState(""); // State to store the selected date
 
-  const handleDateChange = (e) => {
-    setSelectedDate(e.target.value); // Update the selected date when it changes
-  };
-  let pieChart = {
+const PieCharts = () => {
+  const [loading, setLoading] = useState(true);
+  const [pieChart, setPieChart] = useState({
     chart: {
       type: "pie",
     },
-    series: [55, 31, 14],
-    labels: ["Basic Tees", "Custom Short Pants", "Super Hoodies"],
-    colors: ["#98D89E", "#EE8484", "#F6DC7D"],
+    series: [],
+    labels: [],
+    colors: [],
     dataLabels: {
       enabled: false,
     },
@@ -33,20 +31,16 @@ const PieCharts = () => {
       horizontalAlign: "right",
       gap: "15px",
       fontSize: "12px",
-      fontWeight: "bold", // Increase font weight of the legend
+      fontWeight: "bold",
       formatter: function (val, opts) {
         const seriesIndex = opts.seriesIndex;
-        const count = pieChart.series[seriesIndex];
-
-        // Calculate the percentage
-        const percentage = (
-          (count / pieChart.series.reduce((a, b) => a + b, 0)) *
-          100
-        ).toFixed(0);
-
-        // Return the label and percentage
-        return `<span  classname="px-5" style="font-family: Montserrat; font-size: 14px; font-weight: 700; line-height: 17px; letter-spacing: 0em; text-align: left;">${val}</span><br><span style="font-weight:400"> &nbsp; &nbsp;&nbsp;&nbsp;${percentage}%<br><br><span/>`;
+        const count = opts.w.config.series[seriesIndex];
+        const total = opts.w.config.series.reduce((a, b) => a + b, 0);
+        const percentage = ((count / total) * 100).toFixed(0);
+        return `<span className="px-5" style="font-family: Montserrat; font-size: 14px; font-weight: 700; line-height: 17px; letter-spacing: 0em; text-align: left;">${val}</span><br><span style="font-weight:400"> &nbsp; &nbsp;&nbsp;&nbsp;${percentage}%<br><span/>`;
       },
+      
+      
     },
     tooltip: {
       enabled: true,
@@ -64,22 +58,41 @@ const PieCharts = () => {
     },
     responsive: [
       {
-        breakpoint: 768, // define the breakpoint where the chart configuration changes
+        breakpoint: 768,
         options: {
           chart: {
-            height: 200, // decrease the height
-            width: 350, // decrease the width
+            height: 200,
+            width: 350,
           },
         },
       },
- 
-    ]
-  };
+    ],
+  });
+
+  useEffect(() => {
+    fetch("https://fake-json-server-api.onrender.com/pieChart")
+      .then((response) => response.json())
+      .then((data) => {
+        setPieChart((prevChart) => ({
+          ...prevChart,
+          series: data?.series,
+          labels: data?.labels,
+          colors: data?.colors,
+        }));
+      })
+      .catch((error) => {
+        console.log("Error fetching pie chart data:", error);
+      })
+      .finally(() => {
+        setLoading(false); // Set loading state to false in both success and error cases
+      });
+  }, []);
+
 
   return (
-    <div className="pt-6 pb-5  w-full    pie-chart">
-      <div className="bg-white  p-8 rounded-xl w-auto">
-        <div className="flex justify-between mb-4 ">
+    <div className="pt-9 pb-5 w-full pie-chart">
+      <div className="bg-white p-8 rounded-xl pie_chart_container">
+        <div className="flex justify-between mb-4">
           <div
             className="font-bold text-lg"
             style={{
@@ -91,9 +104,7 @@ const PieCharts = () => {
             Top Products
           </div>
           <select
-            className=" rounded px-3 py-1 text-sm border-none"
-            value={selectedDate}
-            onChange={handleDateChange}
+            className="rounded px-3 py-1 text-sm border-none"
             style={{
               fontFamily: "Montserrat, sans-serif",
               fontWeight: 400,
@@ -105,17 +116,20 @@ const PieCharts = () => {
             <option value="June 30, 2023">June-July 2021</option>
           </select>
         </div>
+
+        {loading ? <RotateSpinner/>: (
         <ApexCharts
           options={pieChart}
-          series={pieChart.series}
+          series={pieChart?.series}
           type="pie"
           height={200}
           width={500}
         />
+      )}
       </div>
-      <div className=" flex flex-col   ">
-        <div className="bg-white h-full p-10 rounded-2xl pr-6" style={{minWidth:"440px"}} >
-          <div className="flex justify-between">
+      <div className="flex flex-col">
+        <div className="bg-white h-full p-10 rounded-2xl pr-6 schedule_sectio">
+          <div className="flex gap-32 lg:gap-48">
             <div
               className="font-bold text-lg pb-7"
               style={{
@@ -127,7 +141,7 @@ const PieCharts = () => {
               Today's Schedule
             </div>
             <div
-              className="font-light text-xs "
+              className="font-light text-xs ml-auto"
               style={{
                 fontFamily: "Montserrat, sans-serif",
                 fontWeight: 400,

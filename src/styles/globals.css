@@ -1,5 +1,8 @@
 @tailwind components;
 @tailwind utilities;
+
+  @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -60,6 +63,7 @@ a {
   font-weight: 400;
   font-family: "Lato", sans-serif;
 }
+
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .sidebar {
     width: 75px;
@@ -128,7 +132,7 @@ a {
 }
 .pie-chart {
   display: flex;
-  gap: 105px;
+  gap: 80px;
 }
 @media screen and (max-device-width: 480px) and (orientation: portrait) {
   .pie-chart {
@@ -138,4 +142,61 @@ a {
     gap: 25px;
     width: 100vw;
   }
+}
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+  .schedule_section{
+    width: 426px !important;
+    }
+    .pie_chart_container{
+      width: 100% !important;
+    }
+    .chart_container{
+      width: 106% !important;
+    }
+}
+.schedule_section{
+width: 540px;
+}
+.pie_chart_container{
+  width: 50%;
+}
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .schedule_section{
+    min-width: 590px;
+    }
+    .pie_chart_container{
+      width: 100%;
+    }
+}
+.chart_container{
+  width: 99%;
+}
+@media screen and (min-width: 1024px) and (max-width:1440px) {
+  .schedule_section{
+    width: 100% ;
+    }
+}
+@media screen and (min-width: 1439px)  {
+  .schedule_section{
+    width: 140% ;
+    }
+}
+.apexcharts-legend{
+  top: -8%;
+  display: flex;
+  gap: 25px;
+  font-style: normal;
+  font-weight: 400;
+  font-family: Lato, sans-serif !important;  
+  font-size: 14px;
+}
+tspan{
+  font-weight: 400;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 14px;
+}
+#SvgjsG1501{
+  font-weight: 400;
+  font-family:  sans-serif !important;  
+  font-size: 14px;
 }

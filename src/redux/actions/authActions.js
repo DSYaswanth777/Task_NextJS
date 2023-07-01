@@ -44,7 +44,7 @@ export const signIn = (credentials) => {
       setTimeout(() => {
         // Dispatch SIGN_IN_SUCCESS action if sign-in is successful
         dispatch({ type: "SIGN_IN_SUCCESS" });
-        toast.success("SigIn Succesful");
+        toast.success("You have Successfully Signed In");
         resolve(); // Resolve the promise
       }, 1000);
     }).catch((error) => {

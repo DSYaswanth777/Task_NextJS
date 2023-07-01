@@ -5,7 +5,6 @@ import Profile from "../assets/profile_icon.svg";
 const Navbar = () => {
   return (
     <div className="max-w-full">
-      {/* {" "} */}
       <div className="flex pr-10 justify-between">
         <div
           className="font-bold text-xl pt-10"
@@ -23,7 +22,7 @@ const Navbar = () => {
             style={{ minWidth: "180px", height: "30px" }}
           >
             <input
-              className="border-2 border-gray-300 bg-white h-10 px-6 rounded-lg text-sm focus:outline-none"
+              className="border-2 border-gray-300 bg-white h-10 px-5 rounded-lg text-sm focus:outline-none"
               type="search"
               name="search"
               placeholder="Search..."
