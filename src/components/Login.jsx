@@ -31,7 +31,7 @@ const Login = () => {
       password,
     };
     dispatch(signUp(userData));
-    console.log(userData);
+
   };
 
   const handleToggleSignUp = () => {
@@ -48,6 +48,13 @@ const Login = () => {
     window.google.accounts.id.prompt();
   };
   useEffect(() => {
+    const handleGoogleSignInCallback = (response) => {
+      const { credential } = response;
+      const user = credential;
+      console.log(user);
+      router.push("/home");
+    };
+
     // Load Google Sign-In API script
     const script = document.createElement("script");
     script.src = "https://accounts.google.com/gsi/client";
@@ -55,20 +62,20 @@ const Login = () => {
     script.defer = true;
     document.head.appendChild(script);
 
-    // Define callback function for Google Sign-In response
-    window.handleGoogleSignInCallback = (response) => {
-      const { credential } = response;
-      const user = credential;
-      console.log(user);
-      router.push("/home");
-    };
+    // Attach the callback function to the window object
+    window.handleGoogleSignInCallback = handleGoogleSignInCallback;
 
     return () => {
       // Clean up the script and callback function when the component unmounts
       document.head.removeChild(script);
       delete window.handleGoogleSignInCallback;
     };
-  }, []);
+  }, [router]);
+
+  // ...
+
+  
+
   return (
     <div className="items-center bg-background flex gap-5 flex flex-col md:flex-row ">
       <div className="flex items-center justify-center logo h-screen w-full md:w-1/3">
