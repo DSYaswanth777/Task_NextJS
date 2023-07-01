@@ -196,3 +196,11 @@ tspan{
   width: 115%;
 }
 }
+@media (min-width:320px) and (max-width:375px) {
+  .logo{
+    width:155%
+  }
+  .logo div{
+    padding-left: 95px;
+  }
+}

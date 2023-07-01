@@ -41,7 +41,7 @@ const Login = () => {
     const config = {
       client_id: "330809361538-5r8ep82qmtg9mtjrvk8hs1ahapotvvsn.apps.googleusercontent.com",
       ux_mode: "popup",
-      redirect_uri: "https://your-app-domain.com/auth/google/callback", // Replace with your app's redirect URI
+      redirect_uri: "https://verdant-licorice-316590.netlify.app/home", // Replace with your app's redirect URI
     };
 
     window.google.accounts.id.initialize(config);
@@ -78,7 +78,7 @@ const Login = () => {
 
   return (
     <div className="items-center bg-background flex gap-5 flex flex-col md:flex-row ">
-      <div className="flex items-center justify-center logo h-screen w-full md:w-1/3">
+      <div className="flex items-center justify-center logo h-screen w-full md:w-1/3 xs:w-max-full">
         <div
           className="text-center text-5xl font-bold text-white transform rotate-90 sm:rotate-0 board"
           style={{
