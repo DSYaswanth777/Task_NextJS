@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dashboard_Img from "../assets/dashboard_icon.png";
 import Transcations_Img from "../assets/transaction_icon.png";
 import Schedule_Img from "../assets/schedule_icon.png";
@@ -7,6 +7,7 @@ import Settings_Img from "../assets/setting_icon.png";
 
 import Image from "next/image";
 import menu_Btn from "../assets/burger-menu-left.svg";
+
 const SideBar = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
@@ -15,12 +16,30 @@ const SideBar = () => {
     { title: "Schedules", src: Schedule_Img, fontWeight: 400 },
     { title: "Users", src: Users_Img, fontWeight: 400 },
     { title: "Settings", src: Settings_Img, fontWeight: 400 },
-    { title: "Help", fontWeight: 400,gap:true },
+    { title: "Help", fontWeight: 400, gap: true },
     { title: "ContactUs", fontWeight: 400 },
   ];
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) { // Adjust the breakpoint as needed
+        setOpen(false);
+      } else {
+        setOpen(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const toggleSidebar = () => {
+    setOpen(!open);
+  };
+
   return (
-    
     <div className="p-4 h-full">
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
@@ -36,7 +55,7 @@ const SideBar = () => {
               className={`text-white origin-left ${
                 open ? "font-bold text-3xl" : "hidden"
               }  px-5 pt-6 pb-4 cursor-pointer`}
-              onClick={() => setOpen(!open)}
+              onClick={toggleSidebar}
               style={{
                 fontFamily: "Montserrat, sans-serif",
                 fontWeight: 700,
@@ -47,7 +66,7 @@ const SideBar = () => {
           ) : (
             <div
               className={` ${!open && "rotate-180"} px-5 pt-6 pb-4 cursor-pointer`}
-              onClick={() => setOpen(!open)}
+              onClick={toggleSidebar}
             >
               <Image src={menu_Btn} width={30} height={30} alt="" />
             </div>
@@ -62,9 +81,8 @@ const SideBar = () => {
               } ${index === Menus.length - 2 && "pt-64"} ${
                 index === 0 && "font-extrabold"
               }`}
-             
             >
-              <Image src={Menu.src} alt=""/>
+              <Image src={Menu.src} alt="" />
               <span
                 className={`${!open && "hidden"} origin-left  text-white`}
                 style={{
