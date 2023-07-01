@@ -1,8 +1,9 @@
+import { useSession, signIn } from "next-auth/client";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { signIn, signUp } from "../redux/actions/authActions";
-import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { signUp } from "../redux/actions/authActions";
 import google from "../assets/google_icon.svg";
 import apple from "../assets/apple_icon.svg";
 
@@ -12,6 +13,7 @@ const Login = () => {
   const [isSigningUp, setIsSigningUp] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+  const [session] = useSession();
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -38,38 +40,33 @@ const Login = () => {
     setIsSigningUp(!isSigningUp);
   };
 
-  const handleSignInWithGoogle = () => {
-    const config = {
-      client_id: "330809361538-5r8ep82qmtg9mtjrvk8hs1ahapotvvsn.apps.googleusercontent.com",
-      ux_mode: "redirect",
-      redirect_uri: "https://verdant-licorice-316590.netlify.app/home",
-    };
-
-    window.google.accounts.id.initialize(config);
-    window.google.accounts.id.prompt();
+  const handleSignInWithGoogle = async () => {
+    const result = await signIn("google");
+    if (result.error) {
+      // Handle sign-in error
+    } else {
+      router.push("/home");
+    }
   };
 
   useEffect(() => {
-    const handleGoogleSignInCallback = (response) => {
-      const { credential } = response;
-      const user = credential;
-      console.log(user);
-      router.push("/home");
-    };
-
     const script = document.createElement("script");
     script.src = "https://accounts.google.com/gsi/client";
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
 
-    window.handleGoogleSignInCallback = handleGoogleSignInCallback;
-
     return () => {
       document.head.removeChild(script);
-      delete window.handleGoogleSignInCallback;
     };
-  }, [router]);
+  }, []);
+
+  useEffect(() => {
+    if (session) {
+      // User is already signed in, redirect to the home route
+      router.push("/home");
+    }
+  }, [session]);
 
   return (
     <div className="items-center bg-background flex gap-5 flex flex-col md:flex-row">
